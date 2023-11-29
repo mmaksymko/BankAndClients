@@ -13,13 +13,13 @@ public class Client {
         this.name = name;
     }
 
-    public void withdrawCash(BigDecimal amount) throws IllegalArgumentException {
+    public void withdrawCash(BigDecimal amount) throws IllegalArgumentException, InterruptedException {
         if (balance.compareTo(amount) >= 0) {
             bank.withdrawCash(amount);
             balance = balance.subtract(amount);
         } else throw new IllegalArgumentException(name + " does not have such money!");
     }
-    public void depositCash(BigDecimal amount) {
+    public void depositCash(BigDecimal amount) throws InterruptedException {
         balance = balance.add(amount);
         bank.depositCash(amount);
     }
@@ -33,7 +33,7 @@ public class Client {
     }
 
     public BigDecimal getBalance() {
-        synchronized (this) { return balance;}
+            return balance;
     }
 
     public void setBalance(BigDecimal balance) {

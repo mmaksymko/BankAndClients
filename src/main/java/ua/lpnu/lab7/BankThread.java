@@ -2,7 +2,6 @@ package ua.lpnu.lab7;
 
 import java.math.BigDecimal;
 import java.util.Random;
-import java.util.concurrent.Callable;
 
 public class BankThread extends Thread {
     private boolean paused, stopped;
@@ -41,7 +40,7 @@ public class BankThread extends Thread {
                         client.withdrawCash(new BigDecimal(random.nextInt(0, 10)));
 //                                System.out.println(client.getName() + " withdrew money. Current balance is " + client.getBalance());
                     }
-                } catch (IllegalArgumentException e) {
+                } catch (IllegalArgumentException | InterruptedException e) {
 //                      System.out.println(e.getMessage());
                 }
             }

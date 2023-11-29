@@ -14,7 +14,6 @@ import javafx.util.Pair;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.HashMap;
-import java.util.concurrent.ThreadPoolExecutor;
 
 public class BankController {
     private ObservableList<BankThread> threads;
@@ -35,7 +34,7 @@ public class BankController {
     @FXML
     private Label balance;
     @FXML
-    private TextField threadsAmount, corePoolSize, keepAliveTime;
+    private TextField threadsAmount, keepAliveTime;
     private Bank bank;
 
     @FXML
@@ -83,10 +82,8 @@ public class BankController {
         try {
             this.onTerminateAllThreadsClick();
             threads.addAll(threadManager.createThreads(bank, Integer.parseInt(threadsAmount.getText())));
-//                    ;
-//            executor = created.getKey();
-//            threads.addAll(created.getValue());
-            executor = threadManager.createExecutor(Integer.parseInt(corePoolSize.getText()), Integer.parseInt(keepAliveTime.getText()));
+
+            executor = threadManager.createExecutor(Integer.parseInt(threadsAmount.getText()), Integer.parseInt(keepAliveTime.getText()));
             threads.forEach(t->executor.submitTask(t));
 
             Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.5), e -> update()));

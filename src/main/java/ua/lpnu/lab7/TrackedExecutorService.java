@@ -18,9 +18,7 @@ public class TrackedExecutorService {
 
     public void submitTask(BankThread task) {
         executorService.submit(() -> {
-            synchronized (submittedTasks) {
                 submittedTasks.add(task);
-            }
             task.start();
         });
     }
