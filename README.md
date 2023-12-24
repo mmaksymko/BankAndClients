@@ -2,6 +2,7 @@
 
 ### Description
 Small concurrent university project with JavaFX.
+User can create n threads (each one will be assigned random priority) and manage their state (pause and continue).
 
 ### Why
 To learn and master concurrency in Java.
